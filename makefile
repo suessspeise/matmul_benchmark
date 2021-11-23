@@ -97,6 +97,10 @@ test.exe: mo_test.o mo_timer.o mo_forpy.o forpy_mod.o main.o mo_util_timer.o uti
 run: test.exe
 	./test.exe
 
+.PHONY: silent-run
+silent-run: test.exe
+	./test.exe 1>/dev/null
+
 .PHONY: tidy clean 
 tidy:
 	rm -f *o
@@ -114,7 +118,7 @@ clean:
 redo: clean test 
 volatile: clean test.exe
 	echo -e "\n -- START COMPUTATION -- \n\n"
-	./test.exe
+	time ./test.exe
 	echo -e "\n -- END COMPUTATION, CLEAN UP -- \n"
 	rm -f *.o
 	rm -f *.mod

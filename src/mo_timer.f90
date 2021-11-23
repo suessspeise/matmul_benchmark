@@ -78,8 +78,9 @@ contains
 
 
 #elif defined ICON_WALLCLOCK_TIMER
-   ! WORK IN PROGRESS !
-   ! timer as used by ICON, found in:
+   ! timer as used by ICON Earth System model
+   ! https://mpimet.mpg.de/en/science/modeling-with-icon/icon-configurations
+   ! where the important parts are:
    ! src/shared/mo_util_timer.f90, SUBROUTINE util_read_real_time(it) BIND(C)
    ! support/util_timer.c
 

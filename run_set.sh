@@ -32,9 +32,9 @@ compiler="gfortran ifort"
 timer="OMP_WTIME ETIME_ELAPSED ETIME_USER ETIME_SYSTEM ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
 optimisation="2 3"
 
-compiler="gfortran"
-timer="OMP_WTIME ETIME_ELAPSED ETIME_USER ETIME_SYSTEM ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
-optimisation="3"
+compiler="ifort"
+timer="OMP_WTIME ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
+optimisation="2"
 
 # # light weight test set
 # compiler="gfortran"
