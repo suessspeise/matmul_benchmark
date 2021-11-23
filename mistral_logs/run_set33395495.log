@@ -1,0 +1,1050 @@
+/var/log/slurm/spool_slurmd//job33395495/slurm_script[23]: module: not found [No such file or directory]
+/var/log/slurm/spool_slurmd//job33395495/slurm_script[24]: module: not found [No such file or directory]
+/var/log/slurm/spool_slurmd//job33395495/slurm_script[25]: module: not found [No such file or directory]
+/var/log/slurm/spool_slurmd//job33395495/slurm_script[26]: module: not found [No such file or directory]
+make volatile FC=ifort OPT_LEVEL=2 OMP_WTIME
+
+ -- START COMPUTATION -- 
+
+
+ 
+ timer method: 
+ OMP_WTIME                                                                      
+                                                                                
+                                                                                
+                   
+ 
+ 
+ 
+ 
+ size:          10 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   6.914138793945312E-006
+ average computation time:   6.914138793945312E-007 s for          100 elements
+ 
+ nested loops
+ total elapsed time:   9.775161743164062E-006
+ average computation time:   9.775161743164062E-007 s for          100 elements
+ 
+ numpy
+ total elapsed time:   4.251003265380859E-003
+ average computation time:   4.251003265380859E-004 s for          100 elements
+ 
+ 
+ 
+ 
+ size:          50 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   2.768039703369141E-004
+ average computation time:   2.768039703369140E-005 s for         2500 elements
+ 
+ nested loops
+ total elapsed time:   2.489089965820312E-004
+ average computation time:   2.489089965820313E-005 s for         2500 elements
+ 
+ numpy
+ total elapsed time:   4.281997680664062E-004
+ average computation time:   4.281997680664062E-005 s for         2500 elements
+ 
+ 
+ 
+ 
+ size:         100 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   1.375913619995117E-003
+ average computation time:   1.375913619995117E-004 s for        10000 elements
+ 
+ nested loops
+ total elapsed time:   1.271963119506836E-003
+ average computation time:   1.271963119506836E-004 s for        10000 elements
+ 
+ numpy
+ total elapsed time:   3.112077713012695E-003
+ average computation time:   3.112077713012695E-004 s for        10000 elements
+ 
+ 
+ 
+ 
+ size:         250 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   2.958703041076660E-002
+ average computation time:   2.958703041076660E-003 s for        62500 elements
+ 
+ nested loops
+ total elapsed time:   2.869701385498047E-002
+ average computation time:   2.869701385498047E-003 s for        62500 elements
+ 
+ numpy
+ total elapsed time:   1.543688774108887E-002
+ average computation time:   1.543688774108887E-003 s for        62500 elements
+ 
+ 
+ 
+ 
+ size:         500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.182114839553833     
+ average computation time:   1.821148395538330E-002 s for       250000 elements
+ 
+ nested loops
+ total elapsed time:   0.175508022308350     
+ average computation time:   1.755080223083496E-002 s for       250000 elements
+ 
+ numpy
+ total elapsed time:   0.100543975830078     
+ average computation time:   1.005439758300781E-002 s for       250000 elements
+ 
+ 
+ 
+ 
+ size:         750 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.756396055221558     
+ average computation time:   7.563960552215576E-002 s for       562500 elements
+ 
+ nested loops
+ total elapsed time:   0.749729156494141     
+ average computation time:   7.497291564941407E-002 s for       562500 elements
+ 
+ numpy
+ total elapsed time:   0.315010070800781     
+ average computation time:   3.150100708007812E-002 s for       562500 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.37048792839050     
+ average computation time:   0.137048792839050      s for      1000000 elements
+ 
+ nested loops
+ total elapsed time:    1.33966898918152     
+ average computation time:   0.133966898918152      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.727268934249878     
+ average computation time:   7.272689342498780E-002 s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.36128401756287     
+ average computation time:   0.136128401756287      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.733245849609375     
+ average computation time:   7.332458496093749E-002 s for      1000000 elements
+ 
+ matmul-noalloc
+ total elapsed time:    1.18179106712341     
+ average computation time:   0.118179106712341      s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    4.81543302536011     
+ average computation time:   0.481543302536011      s for      2250000 elements
+ 
+ nested loops
+ total elapsed time:    4.50751614570618     
+ average computation time:   0.450751614570618      s for      2250000 elements
+ 
+ numpy
+ total elapsed time:    2.37483501434326     
+ average computation time:   0.237483501434326      s for      2250000 elements
+ 
+ 
+ 
+ 
+ size:        2000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    10.7683110237122     
+ average computation time:    1.07683110237122      s for      4000000 elements
+ 
+ nested loops
+ total elapsed time:    10.6519529819489     
+ average computation time:    1.06519529819489      s for      4000000 elements
+ 
+ numpy
+ total elapsed time:    5.58035087585449     
+ average computation time:   0.558035087585449      s for      4000000 elements
+ 
+ 
+ 
+ 
+ size:        2500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    21.4040369987488     
+ average computation time:    2.14040369987488      s for      6250000 elements
+ 
+ numpy
+ total elapsed time:    10.9249629974365     
+ average computation time:    1.09249629974365      s for      6250000 elements
+ 
+ 
+ 
+ 
+ size:        3000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    36.9108729362488     
+ average computation time:    3.69108729362488      s for      9000000 elements
+ 
+ numpy
+ total elapsed time:    18.5530319213867     
+ average computation time:    1.85530319213867      s for      9000000 elements
+ 
+ 
+ 
+ 
+ size:        3500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    58.9837169647217     
+ average computation time:    5.89837169647217      s for     12250000 elements
+ 
+ numpy
+ total elapsed time:    29.5789911746979     
+ average computation time:    2.95789911746979      s for     12250000 elements
+ 
+ 
+ 
+ 
+ size:        4000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    86.0800030231476     
+ average computation time:    8.60800030231476      s for     16000000 elements
+ 
+ numpy
+ total elapsed time:    43.4019520282745     
+ average computation time:    4.34019520282745      s for     16000000 elements
+ 
+ 
+ 
+ 
+ size:        4500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    125.595973968506     
+ average computation time:    12.5595973968506      s for     20250000 elements
+ 
+ numpy
+ total elapsed time:    62.2574830055237     
+ average computation time:    6.22574830055237      s for     20250000 elements
+ 
+ 
+ 
+ 
+ size:        5000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    172.497030019760     
+ average computation time:    17.2497030019760      s for     25000000 elements
+ 
+ numpy
+ total elapsed time:    85.0123798847198     
+ average computation time:    8.50123798847198      s for     25000000 elements
+ 
+ 
+ 
+ 
+ size:        5500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    232.749699115753     
+ average computation time:    23.2749699115753      s for     30250000 elements
+ 
+ numpy
+ total elapsed time:    113.494509220123     
+ average computation time:    11.3494509220123      s for     30250000 elements
+ 
+ 
+ 
+ 
+ size:        6000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    301.228730916977     
+ average computation time:    30.1228730916977      s for     36000000 elements
+ 
+ numpy
+ total elapsed time:    146.152134895325     
+ average computation time:    14.6152134895325      s for     36000000 elements
+ 
+ 
+ 
+ 
+ size:        6500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    381.812613010406     
+ average computation time:    38.1812613010406      s for     42250000 elements
+ 
+ numpy
+ total elapsed time:    186.091258049011     
+ average computation time:    18.6091258049011      s for     42250000 elements
+ 
+ 
+ 
+ 
+ size:        7000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    478.736552953720     
+ average computation time:    47.8736552953720      s for     49000000 elements
+ 
+ numpy
+ total elapsed time:    231.846801042557     
+ average computation time:    23.1846801042557      s for     49000000 elements
+ 
+ 
+ 
+ 
+ size:        7500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    583.058819055557     
+ average computation time:    58.3058819055557      s for     56250000 elements
+ 
+ numpy
+ total elapsed time:    283.585986852646     
+ average computation time:    28.3585986852646      s for     56250000 elements
+ 
+
+ -- END COMPUTATION, CLEAN UP -- 
+
+make volatile FC=ifort OPT_LEVEL=2 ETIME_ELAPSED
+src/mo_timer.f90(98): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        t_zero = etime(t) 
+-----------------^
+src/mo_timer.f90(102): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        t_end  = etime(t)
+-----------------^
+compilation aborted for src/mo_timer.f90 (code 1)
+make: *** [makefile:85: mo_timer.o] Error 1
+make volatile FC=ifort OPT_LEVEL=2 ETIME_USER
+src/mo_timer.f90(109): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        e = etime(t) 
+------------^
+src/mo_timer.f90(115): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        e = etime(t) 
+------------^
+compilation aborted for src/mo_timer.f90 (code 1)
+make: *** [makefile:85: mo_timer.o] Error 1
+make volatile FC=ifort OPT_LEVEL=2 ETIME_SYSTEM
+src/mo_timer.f90(124): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        e = etime(t) 
+------------^
+src/mo_timer.f90(130): error #6404: This name does not have a type, and must have an explicit type.   [ETIME]
+        e = etime(t) 
+------------^
+compilation aborted for src/mo_timer.f90 (code 1)
+make: *** [makefile:85: mo_timer.o] Error 1
+make volatile FC=ifort OPT_LEVEL=2 ICON_WALLCLOCK_TIMER
+
+ -- START COMPUTATION -- 
+
+
+ 
+ timer method: 
+ ICON_WALLCLOCK_TIMER                                                           
+                                                                                
+                                                                                
+                   
+ 
+ 
+ 
+ 
+ size:          10 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   8.106231689453125E-006
+ average computation time:   8.106231689453125E-007 s for          100 elements
+ 
+ nested loops
+ total elapsed time:   1.096725463867188E-005
+ average computation time:   1.096725463867187E-006 s for          100 elements
+ 
+ numpy
+ total elapsed time:   9.028911590576172E-004
+ average computation time:   9.028911590576172E-005 s for          100 elements
+ 
+ 
+ 
+ 
+ size:          50 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   2.839565277099609E-004
+ average computation time:   2.839565277099609E-005 s for         2500 elements
+ 
+ nested loops
+ total elapsed time:   2.441406250000000E-004
+ average computation time:   2.441406250000000E-005 s for         2500 elements
+ 
+ numpy
+ total elapsed time:   4.458427429199219E-004
+ average computation time:   4.458427429199219E-005 s for         2500 elements
+ 
+ 
+ 
+ 
+ size:         100 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   1.430034637451172E-003
+ average computation time:   1.430034637451172E-004 s for        10000 elements
+ 
+ nested loops
+ total elapsed time:   1.286029815673828E-003
+ average computation time:   1.286029815673828E-004 s for        10000 elements
+ 
+ numpy
+ total elapsed time:   2.119064331054688E-003
+ average computation time:   2.119064331054687E-004 s for        10000 elements
+ 
+ 
+ 
+ 
+ size:         250 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   3.001809120178223E-002
+ average computation time:   3.001809120178223E-003 s for        62500 elements
+ 
+ nested loops
+ total elapsed time:   2.932786941528320E-002
+ average computation time:   2.932786941528320E-003 s for        62500 elements
+ 
+ numpy
+ total elapsed time:   1.550912857055664E-002
+ average computation time:   1.550912857055664E-003 s for        62500 elements
+ 
+ 
+ 
+ 
+ size:         500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.182529211044312     
+ average computation time:   1.825292110443115E-002 s for       250000 elements
+ 
+ nested loops
+ total elapsed time:   0.176888942718506     
+ average computation time:   1.768889427185059E-002 s for       250000 elements
+ 
+ numpy
+ total elapsed time:   0.100723981857300     
+ average computation time:   1.007239818572998E-002 s for       250000 elements
+ 
+ 
+ 
+ 
+ size:         750 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.760551929473877     
+ average computation time:   7.605519294738769E-002 s for       562500 elements
+ 
+ nested loops
+ total elapsed time:   0.750020980834961     
+ average computation time:   7.500209808349609E-002 s for       562500 elements
+ 
+ numpy
+ total elapsed time:   0.315855026245117     
+ average computation time:   3.158550262451172E-002 s for       562500 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.33455586433411     
+ average computation time:   0.133455586433411      s for      1000000 elements
+ 
+ nested loops
+ total elapsed time:    1.34120917320251     
+ average computation time:   0.134120917320251      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.727671861648560     
+ average computation time:   7.276718616485596E-002 s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.36635994911194     
+ average computation time:   0.136635994911194      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.726678848266602     
+ average computation time:   7.266788482666016E-002 s for      1000000 elements
+ 
+ matmul-noalloc
+ total elapsed time:    1.18343496322632     
+ average computation time:   0.118343496322632      s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    4.66844606399536     
+ average computation time:   0.466844606399536      s for      2250000 elements
+ 
+ nested loops
+ total elapsed time:    4.51220011711121     
+ average computation time:   0.451220011711121      s for      2250000 elements
+ 
+ numpy
+ total elapsed time:    2.38542294502258     
+ average computation time:   0.238542294502258      s for      2250000 elements
+ 
+ 
+ 
+ 
+ size:        2000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    10.8500039577484     
+ average computation time:    1.08500039577484      s for      4000000 elements
+ 
+ nested loops
+ total elapsed time:    10.6742300987244     
+ average computation time:    1.06742300987244      s for      4000000 elements
+ 
+ numpy
+ total elapsed time:    5.61211800575256     
+ average computation time:   0.561211800575256      s for      4000000 elements
+ 
+ 
+ 
+ 
+ size:        2500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    21.5933101177216     
+ average computation time:    2.15933101177216      s for      6250000 elements
+ 
+ numpy
+ total elapsed time:    10.9771652221680     
+ average computation time:    1.09771652221680      s for      6250000 elements
+ 
+ 
+ 
+ 
+ size:        3000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    37.4369029998779     
+ average computation time:    3.74369029998779      s for      9000000 elements
+ 
+ numpy
+ total elapsed time:    18.6360969543457     
+ average computation time:    1.86360969543457      s for      9000000 elements
+ 
+ 
+ 
+ 
+ size:        3500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    59.5338912010193     
+ average computation time:    5.95338912010193      s for     12250000 elements
+ 
+ numpy
+ total elapsed time:    29.7238261699677     
+ average computation time:    2.97238261699677      s for     12250000 elements
+ 
+ 
+ 
+ 
+ size:        4000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    93.1196551322937     
+ average computation time:    9.31196551322937      s for     16000000 elements
+ 
+ numpy
+ total elapsed time:    43.6153500080109     
+ average computation time:    4.36153500080109      s for     16000000 elements
+ 
+ 
+ 
+ 
+ size:        4500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    126.938622951508     
+ average computation time:    12.6938622951508      s for     20250000 elements
+ 
+ numpy
+ total elapsed time:    62.4428908824921     
+ average computation time:    6.24428908824921      s for     20250000 elements
+ 
+ 
+ 
+ 
+ size:        5000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    173.145036935806     
+ average computation time:    17.3145036935806      s for     25000000 elements
+ 
+ numpy
+ total elapsed time:    85.0394778251648     
+ average computation time:    8.50394778251648      s for     25000000 elements
+ 
+ 
+ 
+ 
+ size:        5500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    233.764338970184     
+ average computation time:    23.3764338970184      s for     30250000 elements
+ 
+ numpy
+ total elapsed time:    113.804594039917     
+ average computation time:    11.3804594039917      s for     30250000 elements
+ 
+ 
+ 
+ 
+ size:        6000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    302.600429773331     
+ average computation time:    30.2600429773331      s for     36000000 elements
+ 
+ numpy
+ total elapsed time:    146.292069911957     
+ average computation time:    14.6292069911957      s for     36000000 elements
+ 
+ 
+ 
+ 
+ size:        6500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    383.677531957626     
+ average computation time:    38.3677531957626      s for     42250000 elements
+ 
+ numpy
+ total elapsed time:    186.126614093781     
+ average computation time:    18.6126614093781      s for     42250000 elements
+ 
+ 
+ 
+ 
+ size:        7000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    480.795008182526     
+ average computation time:    48.0795008182526      s for     49000000 elements
+ 
+ numpy
+ total elapsed time:    231.159543991089     
+ average computation time:    23.1159543991089      s for     49000000 elements
+ 
+ 
+ 
+ 
+ size:        7500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    582.990366935730     
+ average computation time:    58.2990366935730      s for     56250000 elements
+ 
+ numpy
+ total elapsed time:    283.585124969482     
+ average computation time:    28.3585124969482      s for     56250000 elements
+ 
+
+ -- END COMPUTATION, CLEAN UP -- 
+
+make volatile FC=ifort OPT_LEVEL=2 TIMER_CPU_TIME
+
+ -- START COMPUTATION -- 
+
+
+ 
+ timer method: 
+ TIMER_CPU_TIME                                                                 
+                                                                                
+                                                                                
+                   
+ 
+ 
+ 
+ 
+ size:          10 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for          100 elements
+ 
+ nested loops
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for          100 elements
+ 
+ numpy
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for          100 elements
+ 
+ 
+ 
+ 
+ size:          50 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for         2500 elements
+ 
+ nested loops
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for         2500 elements
+ 
+ numpy
+ total elapsed time:   0.000000000000000E+000
+ average computation time:   0.000000000000000E+000 s for         2500 elements
+ 
+ 
+ 
+ 
+ size:         100 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   1.000000000000001E-003
+ average computation time:   1.000000000000001E-004 s for        10000 elements
+ 
+ nested loops
+ total elapsed time:   1.000000000000001E-003
+ average computation time:   1.000000000000001E-004 s for        10000 elements
+ 
+ numpy
+ total elapsed time:   1.999999999999974E-003
+ average computation time:   1.999999999999974E-004 s for        10000 elements
+ 
+ 
+ 
+ 
+ size:         250 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   2.999500000000002E-002
+ average computation time:   2.999500000000002E-003 s for        62500 elements
+ 
+ nested loops
+ total elapsed time:   2.899599999999997E-002
+ average computation time:   2.899599999999997E-003 s for        62500 elements
+ 
+ numpy
+ total elapsed time:   1.499800000000001E-002
+ average computation time:   1.499800000000001E-003 s for        62500 elements
+ 
+ 
+ 
+ 
+ size:         500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.183972000000000     
+ average computation time:   1.839720000000000E-002 s for       250000 elements
+ 
+ nested loops
+ total elapsed time:   0.176973000000000     
+ average computation time:   1.769730000000000E-002 s for       250000 elements
+ 
+ numpy
+ total elapsed time:   0.100985000000000     
+ average computation time:   1.009850000000000E-002 s for       250000 elements
+ 
+ 
+ 
+ 
+ size:         750 , repeats:          10
+ 
+ matmul()
+ total elapsed time:   0.759884000000000     
+ average computation time:   7.598840000000001E-002 s for       562500 elements
+ 
+ nested loops
+ total elapsed time:   0.740887000000000     
+ average computation time:   7.408870000000004E-002 s for       562500 elements
+ 
+ numpy
+ total elapsed time:   0.316952000000000     
+ average computation time:   3.169520000000001E-002 s for       562500 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.36479100000000     
+ average computation time:   0.136479100000000      s for      1000000 elements
+ 
+ nested loops
+ total elapsed time:    1.34779500000000     
+ average computation time:   0.134779500000000      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.725889000000000     
+ average computation time:   7.258890000000004E-002 s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    1.36479200000000     
+ average computation time:   0.136479200000000      s for      1000000 elements
+ 
+ numpy
+ total elapsed time:   0.726889999999999     
+ average computation time:   7.268899999999992E-002 s for      1000000 elements
+ 
+ matmul-noalloc
+ total elapsed time:    1.18482000000000     
+ average computation time:   0.118482000000000      s for      1000000 elements
+ 
+ 
+ 
+ 
+ size:        1500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    4.67528900000000     
+ average computation time:   0.467528900000000      s for      2250000 elements
+ 
+ nested loops
+ total elapsed time:    4.55530800000000     
+ average computation time:   0.455530800000000      s for      2250000 elements
+ 
+ numpy
+ total elapsed time:    2.39563500000000     
+ average computation time:   0.239563500000000      s for      2250000 elements
+ 
+ 
+ 
+ 
+ size:        2000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    10.8323540000000     
+ average computation time:    1.08323540000000      s for      4000000 elements
+ 
+ nested loops
+ total elapsed time:    10.7683630000000     
+ average computation time:    1.07683630000000      s for      4000000 elements
+ 
+ numpy
+ total elapsed time:    5.61414700000000     
+ average computation time:   0.561414700000000      s for      4000000 elements
+ 
+ 
+ 
+ 
+ size:        2500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    21.5657210000000     
+ average computation time:    2.15657210000000      s for      6250000 elements
+ 
+ numpy
+ total elapsed time:    10.9803310000000     
+ average computation time:    1.09803310000000      s for      6250000 elements
+ 
+ 
+ 
+ 
+ size:        3000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    37.2683340000000     
+ average computation time:    3.72683340000000      s for      9000000 elements
+ 
+ numpy
+ total elapsed time:    18.6421650000000     
+ average computation time:    1.86421650000000      s for      9000000 elements
+ 
+ 
+ 
+ 
+ size:        3500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    59.6479320000000     
+ average computation time:    5.96479320000000      s for     12250000 elements
+ 
+ numpy
+ total elapsed time:    29.7324810000000     
+ average computation time:    2.97324810000000      s for     12250000 elements
+ 
+ 
+ 
+ 
+ size:        4000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    86.8837910000000     
+ average computation time:    8.68837910000000      s for     16000000 elements
+ 
+ numpy
+ total elapsed time:    43.6033720000000     
+ average computation time:    4.36033720000000      s for     16000000 elements
+ 
+ 
+ 
+ 
+ size:        4500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    126.749731000000     
+ average computation time:    12.6749731000000      s for     20250000 elements
+ 
+ numpy
+ total elapsed time:    62.4585050000000     
+ average computation time:    6.24585050000000      s for     20250000 elements
+ 
+ 
+ 
+ 
+ size:        5000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    173.530620000000     
+ average computation time:    17.3530620000000      s for     25000000 elements
+ 
+ numpy
+ total elapsed time:    85.0320740000001     
+ average computation time:    8.50320740000001      s for     25000000 elements
+ 
+ 
+ 
+ 
+ size:        5500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    233.600487000000     
+ average computation time:    23.3600487000000      s for     30250000 elements
+ 
+ numpy
+ total elapsed time:    113.576733000000     
+ average computation time:    11.3576733000000      s for     30250000 elements
+ 
+ 
+ 
+ 
+ size:        6000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    302.651990000000     
+ average computation time:    30.2651990000000      s for     36000000 elements
+ 
+ numpy
+ total elapsed time:    146.187777000000     
+ average computation time:    14.6187777000000      s for     36000000 elements
+ 
+ 
+ 
+ 
+ size:        6500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    383.832648000000     
+ average computation time:    38.3832648000000      s for     42250000 elements
+ 
+ numpy
+ total elapsed time:    186.152701000000     
+ average computation time:    18.6152701000000      s for     42250000 elements
+ 
+ 
+ 
+ 
+ size:        7000 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    480.303983000000     
+ average computation time:    48.0303983000000      s for     49000000 elements
+ 
+ numpy
+ total elapsed time:    231.856752000000     
+ average computation time:    23.1856752000000      s for     49000000 elements
+ 
+ 
+ 
+ 
+ size:        7500 , repeats:          10
+ 
+ matmul()
+ total elapsed time:    587.022759000000     
+ average computation time:    58.7022759000000      s for     56250000 elements
+ 
+ numpy
+ total elapsed time:    284.947681000000     
+ average computation time:    28.4947681000000      s for     56250000 elements
+ 
+
+ -- END COMPUTATION, CLEAN UP -- 
+
+
+real	3h9m13.10s
+user	3h7m56.58s
+sys	1m7.12s
+
+********************************************************************************
+*                                                                              *
+*  This is the automated job summary provided by DKRZ.                         *
+*  If you encounter problems, need assistance or have any suggestion, please   *
+*  write an email to                                                           *
+*                                                                              *
+*  --  beratung@dkrz.de --                                                     *
+*                                                                              *
+*                       We hope you enjoyed the DKRZ supercomputer MISTRAL ... *
+*
+* JobID            : 33395495
+* JobName          : matmul_test                                       
+* Account          : mh0926
+* User             : m300872 (40035), mpiscl (32054)                   
+* Partition        : compute2
+* QOS              : normal
+* Nodelist         : m20593 (1)                                                
+* AvgCommBlocking  : 0.0000 (in [0,4] less is better)
+* Submit date      : 2021-11-22T16:54:04
+* Start time       : 2021-11-22T16:54:10
+* End time         : 2021-11-22T20:03:26
+* Elapsed time     : 03:09:16 (Timelimit=08:00:00)                     
+* Command          : /mnt/lustre01/pf/zmaw/m300872/matmul_benchmark/run_set.sh
+* WorkDir          : /pf/m/m300872/matmul_benchmark
+*
+* StepID | JobName      NodeHours    MaxRSS [Byte] (@task)   ReqCPUFreq [Hz]
+* ------------------------------------------------------------------------------
+* batch  | batch              3.2
+* ------------------------------------------------------------------------------
+
