@@ -8,7 +8,7 @@
 
 #SBATCH --job-name=matmul_test
 #SBATCH --partition=compute2,compute
-#SBATCH --partition=compute
+#SBATCH --partition=compute2
 #SBATCH --chdir=/pf/m/m300872/matmul_benchmark
 #SBATCH --nodes=1
 #SBATCH --threads-per-core=2

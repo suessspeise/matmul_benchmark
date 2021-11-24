@@ -1,7 +1,7 @@
 SHELL:=/bin/bash
 
-FC = gfortran
 FC = ifort
+FC = gfortran
 
 TIMER = OMP_WTIME
 # TIMER = ETIME_ELAPSED

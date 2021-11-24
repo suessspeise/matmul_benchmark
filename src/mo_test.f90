@@ -286,11 +286,50 @@ contains
     end subroutine test_matmul_numpy
     
     
+    ! uses numpys matmul
+    ! uses forpy to send and receive data to python environment and call functions
+    ! about forpy: https://github.com/ylikx/forpy
+    subroutine test_matmul_python_loop(edge_length, repetitions)
+        integer, intent(in) :: edge_length, repetitions
+        integer :: t                                          ! iterator
+        integer             :: e                              ! error code
+        type(py_ndarray)    :: nd_A, nd_B, nd_C 
+        real(wp), pointer, dimension(:,:) :: CC
+        type(py_tuple)      :: args                           ! sending data
+        type(py_object)     :: receive_obj                    ! receiving data
+        ! python module
+        type(py_module)     :: matmul_loop
+
+        e = py_import_module(matmul_loop, "py.matmul_loop") ! import, out of timer scope
     
-    ! used in saxpy test
-    ! #ifndef N
-    ! #define N 2**20
-    ! #endif
+        call alloc_arrays(edge_length)
+        call assign_values()
+        call timer_start()
+    
+        ! sending data
+        e = py_ndarray_create_nocopy(nd_A, A)  ! create numpy arrays
+        e = py_ndarray_create_nocopy(nd_B, B)
+        e = py_tuple_create(args,2)          ! pack into tuple 
+        e = args%setitem(0,nd_A)
+        e = args%setitem(1,nd_B)
+        
+        do t = 1,repetitions
+            ! calculate
+            e = py_call(receive_obj,matmul_loop , "matmul_loop", args)
+            ! receiving data
+            e = py_ndarray_create_empty(nd_C, [edge_length, edge_length], dtype="float64")
+            e = py_cast(nd_C, receive_obj)
+            e = nd_C%get_data(CC, order=py_get_arr_order(nd_C))
+            ! because of storage order differences we have to tranpose
+            C = transpose(CC) 
+        end do  
+        
+        call timer_stop()
+        call py_err_print
+        call print_result('python matmul_loop', repetitions, size(C))
+        call dealloc_arrays()
+    end subroutine test_matmul_python_loop
+    
     
     ! SAXPY stands for "Single-Precision A·X Plus ".  It is a function in
     ! the standard Basic Linear Algebra Subroutines (BLAS)library. 
@@ -317,9 +356,6 @@ contains
         call random_number(x)
         call random_number(y)
         
-        ! python environment
-        !call py_initialize() !called in main.f90
-        !call py_add_path('.')
         e = py_import_module(saxpy, "saxpy_numpy") 
     
         call timer_start()
@@ -337,32 +373,9 @@ contains
             e = py_call(receive_obj, saxpy, "saxpy_numpy", args)
         end do  
         
-        !do t = 1, times
-        !    y(t) = a*x(t)+y(t)
-        !enddo
-    
         call timer_stop()
-    ! print results prints invalid information about arraysize
-        !call print_result('saxpy, numpy')
     
     end subroutine test_saxpy_numpy
-    
-    
-    !subroutine time_test():
-    !    ! python module
-    !    type(py_module)     :: timespend
-    !
-    !    ! python environment
-    !    call py_initialize()
-    !    call py_add_path('.')
-    !    py_error = py_import_module(timespend, "timespend") 
-    !    
-    !
-    !    py_error = py_call(receive_obj, timespend, "spend_time", args)
-    !
-    !    t_all = t_end - t_zero 
-    !    print *, "total elapsed time: ", t_all
-    !end subroutine time_test
     
     
     subroutine test_saxpy_fortran(times, length)
@@ -385,9 +398,6 @@ contains
             y(t) = a*x(t)+y(t)
         enddo
         call timer_stop()
-    ! print results prints invalid information about arraysize
-        !call print_result('saxpy, fortran')
-    
     end subroutine test_saxpy_fortran
 
                 
