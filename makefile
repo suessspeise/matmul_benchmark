@@ -1,14 +1,15 @@
 SHELL:=/bin/bash
 
-FC = ifort
+FC = pgf90
 FC = gfortran
+FC = ifort
 
+# TIMER = ICON_WALLCLOCK_TIMER
 TIMER = OMP_WTIME
 # TIMER = ETIME_ELAPSED
 # TIMER = ETIME_USER
 # TIMER = ETIME_SYSTEM
-TIMER = ICON_WALLCLOCK_TIMER
-# TIMER = TIMER_CPU_TIME
+# TIMER = CPU_TIME
 
 # optimisation level (e.g. -O3)
 # as variable to be pass to fortran
@@ -25,9 +26,14 @@ endif
 ifeq ($(FC),gfortran)
 CC = gcc
 FFLAGS  = -Wall -g -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
+FFLAGS  = -g -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
 LDFLAGS = -liomp5
 endif
-
+ifeq ($(FC),pgf90)
+CC = pgcc
+FFLAGS  = -g -O$(OPT_LEVEL) -mp -cpp $(PP_DEFINES)
+LDFLAGS = -liomp5
+endif
 
 # Has been tested with the following modules
 # especially Anaconda is known to cause problems and has to be compiled differently
@@ -58,6 +64,15 @@ endif
 # in case you want to download it again:
 forpy_http_adress='https://raw.githubusercontent.com/ylikx/forpy/master/forpy_mod.F90'
 
+# the suspicion was, that numpy uses multithreading. so we try to turn that off here:
+#   see: https://www.reddit.com/r/Python/comments/ghzqle/is_numpy_automatically_multithreading/
+#        https://github.com/numpy/numpy/issues/11826i
+export OMP_NUM_THREADS = 1
+export OPENBLAS_NUM_THREADS = 1 
+export NUMEXPR_NUM_THREADS = 1
+export VECLIB_MAXIMUM_THREADS = 1 
+export MKL_NUM_THREADS = 1
+export MPI_NUM_THREADS = 1
 
 
 .PHONY: test all default

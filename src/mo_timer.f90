@@ -23,8 +23,8 @@ real :: t(2)
 #endif
 
 
-#if defined TIMER_CPU_TIME
-character(len=255) :: timer_method = 'TIMER_CPU_TIME'
+#if defined CPU_TIME
+character(len=255) :: timer_method = 'CPU_TIME'
 #elif defined TIMER_SYSTEM_CLOCK
 character(len=255) :: timer_method = 'TIMER_SYSTEM_CLOCK'
 #elif defined ICON_WALLCLOCK_TIMER
@@ -38,7 +38,7 @@ character(len=255) :: timer_method = 'ETIME_SYSTEM'
 #elif defined OMP_WTIME
 character(len=255) :: timer_method = 'OMP_WTIME'
 #else
-character(len=255) :: timer_method = 'TIMER_CPU_TIME'
+character(len=255) :: timer_method = 'CPU_TIME'
 #endif 
 
 
@@ -49,7 +49,7 @@ public :: get_timer_method
 
 contains
 
-#if defined TIMER_CPU_TIME
+#if defined CPU_TIME
 ! https://gcc.gnu.org/onlinedocs/gfortran/CPU_005fTIME.html
     ! saves time value in local variable
     subroutine timer_start()

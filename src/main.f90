@@ -15,7 +15,6 @@ call py_add_path('./py')
 call initialize_csv
 print *, ''
 print *, 'timer method: ', get_timer_method()
-print *, ''
 
 
 !call test_matmul_intrinsic(5000, 10)
