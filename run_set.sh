@@ -11,7 +11,7 @@
 #SBATCH --partition=compute2
 #SBATCH --chdir=/pf/m/m300872/matmul_benchmark
 #SBATCH --nodes=1
-#SBATCH --threads-per-core=2
+#SBATCH --threads-per-core=1
 # the following is needed to work around a bug that otherwise leads to
 # a too low number of ranks when using compute,compute2 as queue
 #SBATCH --mem=0
@@ -32,7 +32,7 @@ compiler="gfortran ifort"
 timer="OMP_WTIME ETIME_ELAPSED ETIME_USER ETIME_SYSTEM ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
 optimisation="2 3"
 
-compiler="ifort"
+compiler="gfortran"
 timer="OMP_WTIME ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
 optimisation="2"
 
@@ -46,8 +46,8 @@ run_set(){
         for timr in $timer; do
             for opti in $optimisation; do
                 #echo "${comp}_${opti}_${timr}"
-                echo "make volatile FC=$comp OPT_LEVEL=$opti $timr"
-                make volatile FC=$comp OPT_LEVEL=$opti TIMER=$timr --silent
+                echo "make volatile FC=$comp OPT_LEVEL=$opti $timr RUN_SET=true"
+                make volatile FC=$comp OPT_LEVEL=$opti TIMER=$timr RUN_SET=true
             done
         done
     done

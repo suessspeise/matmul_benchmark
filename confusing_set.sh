@@ -1,4 +1,4 @@
-EDGE=1000
+EDGE=2000
 REPS=10
 TIMER='CPU_TIME' #this is the most trusted and the confusing one, but feel free to try another
 #TIMER='OMP_WTIME'

@@ -1,39 +1,49 @@
 SHELL:=/bin/bash
 
+
+# possible configurations:
 FC = pgf90
-FC = gfortran
 FC = ifort
-
-# TIMER = ICON_WALLCLOCK_TIMER
+FC = gfortran
+#
+TIMER = ICON_WALLCLOCK_TIMER
 TIMER = OMP_WTIME
-# TIMER = ETIME_ELAPSED
-# TIMER = ETIME_USER
-# TIMER = ETIME_SYSTEM
-# TIMER = CPU_TIME
+TIMER = CPU_TIME
+# these only exist for gfortran:
+#TIMER = ETIME_ELAPSED 
+#TIMER = ETIME_USER
+#TIMER = ETIME_SYSTEM
+#
+# optimisation level (e.g. `3` produces compiler flag `-O3`)
+# as variable to be passed to fortran
+OPT_LEVEL = 2
+# if you want to run a set, define RUN_SET with whatever value pleses you
+ifdef RUN_SET
+	SET_SWITCH = -D TEST_SUITE
+endif
 
-# optimisation level (e.g. -O3)
-# as variable to be pass to fortran
-OPT_LEVEL = 3
+
 # preprocessor directives to define a timer and pass compiler info to fortran 
-PP_DEFINES =  -D COMPILER='"$(FC)"' -D OPT_LEVEL='"$(OPT_LEVEL)"' -D $(TIMER)
+PP_DEFINES =  -D COMPILER='"$(FC)"' -D OPT_LEVEL='"$(OPT_LEVEL)"' -D $(TIMER) $(SET_SWITCH)
+
 
 # compiler specific flags
 ifeq ($(FC),ifort)
 CC = icc
-FFLAGS  = -g -O$(OPT_LEVEL) -fast -fpp -mkl -qopenmp $(PP_DEFINES)
+FFLAGS  = -O$(OPT_LEVEL) -fpp -mkl -qopenmp $(PP_DEFINES) # removed: -fast 
 LDFLAGS = -mkl=sequential -qopenmp
 endif
 ifeq ($(FC),gfortran)
 CC = gcc
-FFLAGS  = -Wall -g -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
-FFLAGS  = -g -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
-LDFLAGS = -liomp5
+FFLAGS  = -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
+LDFLAGS = -fopenmp
 endif
 ifeq ($(FC),pgf90)
 CC = pgcc
-FFLAGS  = -g -O$(OPT_LEVEL) -mp -cpp $(PP_DEFINES)
+FFLAGS  = -O$(OPT_LEVEL) -mp -cpp $(PP_DEFINES)
 LDFLAGS = -liomp5
 endif
+
 
 # Has been tested with the following modules
 # especially Anaconda is known to cause problems and has to be compiled differently
@@ -54,15 +64,17 @@ PYTHON_LDFLAGS = -L${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpy
 endif
 ifeq ($(PYTHON_MODULE),python3/2021.01-gcc-9.1.0)
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
-PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm
+PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
 endif
-ifeq ($(PYTHON_MODULE),python3/unstable)
+ifeq ($(PYTHON_MODULE),python3/unstable) # this actually defaults to the above module as of November 2021
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
-PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm
+PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
 endif
+
 
 # in case you want to download it again:
 forpy_http_adress='https://raw.githubusercontent.com/ylikx/forpy/master/forpy_mod.F90'
+
 
 # the suspicion was, that numpy uses multithreading. so we try to turn that off here:
 #   see: https://www.reddit.com/r/Python/comments/ghzqle/is_numpy_automatically_multithreading/
@@ -73,6 +85,7 @@ export NUMEXPR_NUM_THREADS = 1
 export VECLIB_MAXIMUM_THREADS = 1 
 export MKL_NUM_THREADS = 1
 export MPI_NUM_THREADS = 1
+# this did not work. instead we inhibited multithreading via slurm with `--threads-per-core=1`
 
 
 .PHONY: test all default
@@ -110,6 +123,7 @@ test.exe: mo_test.o mo_timer.o mo_forpy.o forpy_mod.o main.o mo_util_timer.o uti
 
 .PHONY: run
 run: test.exe
+	echo ${PP_DEFINES}
 	./test.exe
 
 .PHONY: silent-run

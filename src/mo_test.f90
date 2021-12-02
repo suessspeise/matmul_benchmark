@@ -251,7 +251,7 @@ contains
         ! python module
         type(py_module)     :: matmul_loop
 
-        e = py_import_module(matmul_loop, "py.matmul_loop") ! import, out of timer scope
+        e = py_import_module(matmul_loop, "matmul_loop") ! import, out of timer scope
     
         call alloc_arrays(edge_length)
         call assign_values()
@@ -274,7 +274,6 @@ contains
             ! because of storage order differences we have to tranpose
             C = transpose(CC) 
         end do  
-        
         call timer_stop()
         call py_err_print
         call print_result('python matmul_loop', repetitions, size(C))

@@ -5,24 +5,26 @@ use mo_forpy
 
 implicit none
 
-type configuration
+type configuration 
+    ! used to pass arguments internally
     integer   :: edge, reps
     character :: method
 end type
 
+! init python and the csv to write in
 call py_initialize()
 call py_add_path('./py')
 call initialize_csv
+
 print *, ''
 print *, 'timer method: ', get_timer_method()
 
 
-!call test_matmul_intrinsic(5000, 10)
-!call test_matmul_numpy(100, 10)
-!call test_matmul_python_loop(100,10)
-
-
+#ifdef TEST_SUITE 
+call matmul_test_suite()
+#else
 call run_single()
+#endif
 
 
 contains 
@@ -36,7 +38,7 @@ contains
             call test_matmul_explicit(conf%edge, conf%reps)
         elseif ( conf%method == 'n' ) then
             call test_matmul_numpy(conf%edge, conf%reps)
-        elseif ( conf%method == 'e' ) then
+        elseif ( conf%method == 'p' ) then
             call test_matmul_python_loop(conf%edge, conf%reps)
         endif
     end subroutine run_single
@@ -68,7 +70,6 @@ contains
         call matmul_test_run( 500, 10, do_nested=.true.)
         call matmul_test_run( 750, 10, do_nested=.true.)
         call matmul_test_run(1000, 10, do_nested=.true.)
-        call matmul_test_run(1000, 10)
         call test_matmul_intrinsic_fixed1000(10)
         call matmul_test_run(1500, 10, do_nested=.true.)
         call matmul_test_run(2000, 10, do_nested=.true.)
@@ -99,6 +100,9 @@ contains
         
         call test_matmul_intrinsic(edge_length, repetitions)
         if (present(do_nested)) call test_matmul_explicit(edge_length, repetitions)
+        ! the python loops would have entered here, but they are to slow to use for comparison
+        ! 500 * 500 matrix takes > 2 minutes
+        !if (present(do_nested)) call test_matmul_python_loop(edge_length, repetitions)
         call test_matmul_numpy(edge_length, repetitions)
     end subroutine matmul_test_run
 
