@@ -45,19 +45,23 @@ LDFLAGS = -liomp5
 endif
 
 
-# Has been tested with the following modules
-# especially Anaconda is known to cause problems and has to be compiled differently
-# See: https://github.com/ylikx/forpy#using-forpy-with-anaconda
-PYTHON_MODULE = python/3.5.2
-PYTHON_MODULE = python3/2021.01-gcc-9.1.0
-PYTHON_MODULE = python3/unstable
+# The PYTHON_PREFIX is system specific
+# The PYTHON_LDFLAGS depend on the used python version (see https://github.com/ylikx/forpy) 
 # in bash it works like this:
 # for python version < 3.8
 #PYTHON_PREFIX=$(python3-config --prefix)
 #PYTHON_LDFLAGS=$(python3-config --ldflags) 
-# and for > 3.8
+# and for >= 3.8
 #PYTHON_LDFLAGS=$(python3-config --ldflags --embed) 
-# makefiles are different, so the variables have been hard coded here:
+#
+# Has been tested for the following modules on mistral.dkrz.de
+PYTHON_MODULE = python/3.5.2 # (Python 3.5.2)
+PYTHON_MODULE = python3/2021.01-gcc-9.1.0 # (Python 3.5.2)
+PYTHON_MODULE = python3/unstable # defaults to the above module (November 2021)
+# especially Anaconda is known to cause problems and has to be compiled differently
+# See: https://github.com/ylikx/forpy#using-forpy-with-anaconda
+#
+# use these or put your own
 ifeq ($(PYTHON_MODULE),python/3.5.2)
 PYTHON_PREFIX  = /sw/rhel6-x64/python/python-3.5.2-gcc49
 PYTHON_LDFLAGS = -L${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpython3.5m -lpthread -ldl  -lutil -lrt -lm  -Xlinker -export-dynamic
@@ -66,7 +70,7 @@ ifeq ($(PYTHON_MODULE),python3/2021.01-gcc-9.1.0)
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
 PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
 endif
-ifeq ($(PYTHON_MODULE),python3/unstable) # this actually defaults to the above module as of November 2021
+ifeq ($(PYTHON_MODULE),python3/unstable) 
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
 PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
 endif
