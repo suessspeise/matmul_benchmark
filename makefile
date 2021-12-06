@@ -21,24 +21,21 @@ OPT_LEVEL = 2
 ifdef RUN_SET
 	SET_SWITCH = -D TEST_SUITE
 endif
-
-
+CONFIG_ID = $(FC)_O$(OPT_LEVEL)_$(TIMER)
 # preprocessor directives to define a timer and pass compiler info to fortran 
-PP_DEFINES =  -D COMPILER='"$(FC)"' -D OPT_LEVEL='"$(OPT_LEVEL)"' -D $(TIMER) $(SET_SWITCH)
+PP_DEFINES =  -D COMPILER='"$(FC)"' -D OPT_LEVEL='"$(OPT_LEVEL)"' -D $(TIMER) $(SET_SWITCH) -D CONFIG_ID=$(CONFIG_ID)
 
 
 # compiler specific flags
 ifeq ($(FC),ifort)
 CC = icc
-FFLAGS  = -O$(OPT_LEVEL) -fpp -mkl -qopenmp $(PP_DEFINES) # removed: -fast 
+FFLAGS  = -O$(OPT_LEVEL) -fpp -mkl -qopenmp $(PP_DEFINES) 
 LDFLAGS = -mkl=sequential -qopenmp
-endif
-ifeq ($(FC),gfortran)
+else ifeq ($(FC),gfortran)
 CC = gcc
 FFLAGS  = -O$(OPT_LEVEL) -cpp -fopenmp $(PP_DEFINES)
 LDFLAGS = -fopenmp
-endif
-ifeq ($(FC),pgf90)
+else ifeq ($(FC),pgf90)
 CC = pgcc
 FFLAGS  = -O$(OPT_LEVEL) -mp -cpp $(PP_DEFINES)
 LDFLAGS = -liomp5
@@ -55,24 +52,29 @@ endif
 #PYTHON_LDFLAGS=$(python3-config --ldflags --embed) 
 #
 # Has been tested for the following modules on mistral.dkrz.de
-PYTHON_MODULE = python/3.5.2 # (Python 3.5.2)
-PYTHON_MODULE = python3/2021.01-gcc-9.1.0 # (Python 3.5.2)
-PYTHON_MODULE = python3/unstable # defaults to the above module (November 2021)
+PYTHON_MODULE = python3/unstable
+	# defaults to python3/2021.01-gcc-9.1.0 (November 2021)
+PYTHON_MODULE = .python/3.5.2
+	# (Python 3.5.2)
+PYTHON_MODULE = python3/2021.01-gcc-9.1.0
+	# (Python 3.6.8)
 # especially Anaconda is known to cause problems and has to be compiled differently
 # See: https://github.com/ylikx/forpy#using-forpy-with-anaconda
 #
 # use these or put your own
-ifeq ($(PYTHON_MODULE),python/3.5.2)
+ifeq ($(PYTHON_MODULE), .python/.3.5.2)
 PYTHON_PREFIX  = /sw/rhel6-x64/python/python-3.5.2-gcc49
 PYTHON_LDFLAGS = -L${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpython3.5m -lpthread -ldl  -lutil -lrt -lm  -Xlinker -export-dynamic
-endif
-ifeq ($(PYTHON_MODULE),python3/2021.01-gcc-9.1.0)
+else ifeq ($(PYTHON_MODULE), python3/2021.01-gcc-9.1.0)
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
 PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
-endif
-ifeq ($(PYTHON_MODULE),python3/unstable) 
+else ifeq ($(PYTHON_MODULE),python3/unstable) 
 PYTHON_PREFIX  = /sw/spack-rhel6/miniforge3-4.9.2-3-Linux-x86_64-pwdbqi
 PYTHON_LDFLAGS = -L$(PYTHON_PREFIX)/lib/python3.8/config-3.8-x86_64-linux-gnu -L$(PYTHON_PREFIX)/lib -lpython3.8 -lcrypt -lpthread -ldl  -lutil -lrt -lm -lm -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib/python3.8/config-3.8-x86_64-linux-gnu
+else
+# fallback == .python/3.5.2
+PYTHON_PREFIX  = /sw/rhel6-x64/python/python-3.5.2-gcc49
+PYTHON_LDFLAGS = -L${PYTHON_PREFIX}/lib -Wl,-rpath -Wl,${PYTHON_PREFIX}/lib -lpython3.5m -lpthread -ldl  -lutil -lrt -lm  -Xlinker -export-dynamic
 endif
 
 
@@ -92,10 +94,13 @@ export MPI_NUM_THREADS = 1
 # this did not work. instead we inhibited multithreading via slurm with `--threads-per-core=1`
 
 
+BINARY = $(CONFIG_ID)_test.cod
+
+
 .PHONY: test all default
-default: test.exe
-all: test.exe
-test: test.exe
+default: $(BINARY)
+all: $(BINARY)
+test: $(BINARY)
 
 src/forpy_mod.F90: 
 	wget $(forpy_http_adress)
@@ -122,17 +127,17 @@ mo_test.o: src/mo_test.f90 mo_forpy.o mo_timer.o
 main.o: src/main.f90
 	$(FC) $(FFLAGS) -c src/main.f90
 
-test.exe: mo_test.o mo_timer.o mo_forpy.o forpy_mod.o main.o mo_util_timer.o util_time.o
-	$(FC) -o test.exe main.o mo_test.o mo_timer.o mo_util_timer.o util_timer.o mo_forpy.o forpy_mod.o $(LDFLAGS) $(PYTHON_LDFLAGS) 
+$(BINARY): mo_test.o mo_timer.o mo_forpy.o forpy_mod.o main.o mo_util_timer.o util_time.o
+	$(FC) -o $(BINARY) main.o mo_test.o mo_timer.o mo_util_timer.o util_timer.o mo_forpy.o forpy_mod.o $(LDFLAGS) $(PYTHON_LDFLAGS)
 
 .PHONY: run
-run: test.exe
+run: $(BINARY)
 	echo ${PP_DEFINES}
-	./test.exe
+	./$(BINARY)
 
 .PHONY: silent-run
-silent-run: test.exe
-	./test.exe 1>/dev/null
+silent-run: $(BINARY)
+	./$(BINARY) 1>/dev/null
 
 .PHONY: tidy clean 
 tidy:
@@ -145,18 +150,18 @@ clean:
 	rm -f *.mod
 	rm -f *.pyc
 	rm -rf __pycache__
-	rm -f test.exe
+	rm -f *.cod
 
 .PHONY: redo volatile
 redo: clean test 
-volatile: clean test.exe
+volatile: clean $(BINARY)
 	echo -e "\n -- START COMPUTATION -- \n\n"
-	time ./test.exe
+	time ./$(BINARY)
 	echo -e "\n -- END COMPUTATION, CLEAN UP -- \n"
 	rm -f *.o
 	rm -f *.mod
 	rm -f *.pyc
-	rm -f test.exe
+	rm -f *.cod
 	rm -rf __pycache__
 
 

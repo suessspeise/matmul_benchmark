@@ -21,36 +21,52 @@
 #SBATCH --time=08:00:00
 
 #=============================================================================
-module purge
-module load gcc
-module load intel
-module load python3
+#module purge
+#module load gcc
+#module load intel
+#module load python3
+#module list
 #=============================================================================
 
-
+# whole set
 compiler="gfortran ifort"
-timer="OMP_WTIME ETIME_ELAPSED ETIME_USER ETIME_SYSTEM ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
+timer="OMP_WTIME ICON_WALLCLOCK CPU_TIME ETIME_ELAPSED ETIME_USER ETIME_SYSTEM " #ETIME is gfortran specific
+timer="OMP_WTIME ICON_WALLCLOCK CPU_TIME"
 optimisation="2 3"
 
+# subset to run parallel jobs
 compiler="gfortran"
-timer="OMP_WTIME ICON_WALLCLOCK_TIMER TIMER_CPU_TIME"
+timer="OMP_WTIME ICON_WALLCLOCK CPU_TIME"
 optimisation="2"
 
-# # light weight test set
-# compiler="gfortran"
-# timer="OMP_WTIME"
-# optimisation="3"
+#compiler="gfortran"
+#timer="CPU_TIME"
+#optimisation="2"
 
-run_set(){
+compile_set(){
+    make tidy
     for comp in $compiler; do
         for timr in $timer; do
             for opti in $optimisation; do
-                #echo "${comp}_${opti}_${timr}"
-                echo "make volatile FC=$comp OPT_LEVEL=$opti $timr RUN_SET=true"
-                make volatile FC=$comp OPT_LEVEL=$opti TIMER=$timr RUN_SET=true
+                echo "make FC=$comp OPT_LEVEL=$opti TIMER=$timr RUN_SET=true"
+                make       FC=$comp OPT_LEVEL=$opti TIMER=$timr RUN_SET=true
+                make tidy
             done
         done
     done
 }
 
+run_set(){
+    for comp in $compiler; do
+        for timr in $timer; do
+            for opti in $optimisation; do
+                exe="./${comp}_O${opti}_${timr}_test.cod"
+                echo $exe
+                eval "$exe"
+            done
+        done
+    done
+}
+
+#time compile_set 
 time run_set

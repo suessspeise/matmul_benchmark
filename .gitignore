@@ -1,6 +1,7 @@
 *.o
 *.mod
-test.exe
+*.exe
+*.cod
 __pycache__/
 py/__pycache__/
 log/*

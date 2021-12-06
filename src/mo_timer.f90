@@ -3,7 +3,7 @@ module mo_timer
 #ifdef OMP_WTIME
 use omp_lib
 #endif
-#ifdef ICON_WALLCLOCK_TIMER
+#ifdef ICON_WALLCLOCK
 USE iso_c_binding,      ONLY: c_loc
 USE mo_util_timer,      ONLY: c_util_read_real_time => util_read_real_time
 #endif
@@ -27,8 +27,8 @@ real :: t(2)
 character(len=255) :: timer_method = 'CPU_TIME'
 #elif defined TIMER_SYSTEM_CLOCK
 character(len=255) :: timer_method = 'TIMER_SYSTEM_CLOCK'
-#elif defined ICON_WALLCLOCK_TIMER
-character(len=255) :: timer_method = 'ICON_WALLCLOCK_TIMER'
+#elif defined ICON_WALLCLOCK
+character(len=255) :: timer_method = 'ICON_WALLCLOCK'
 #elif defined ETIME_ELAPSED
 character(len=255) :: timer_method = 'ETIME_ELAPSED'
 #elif defined ETIME_USER
@@ -77,7 +77,7 @@ contains
     end subroutine timer_stop
 
 
-#elif defined ICON_WALLCLOCK_TIMER
+#elif defined ICON_WALLCLOCK
    ! timer as used by ICON Earth System model
    ! https://mpimet.mpg.de/en/science/modeling-with-icon/icon-configurations
    ! where the important parts are:
