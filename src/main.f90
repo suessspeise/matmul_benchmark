@@ -1,7 +1,9 @@
 program test_matmul_implementations
 
-use mo_test
-use mo_forpy
+use mo_test,  only: initialize_csv, get_timer_method,               &
+                  & test_matmul_intrinsic, test_matmul_python_loop, &
+                  & test_matmul_explicit, test_matmul_numpy
+use mo_forpy, only: py_initialize, py_add_path
 
 implicit none
 
