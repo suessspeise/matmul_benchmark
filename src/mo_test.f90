@@ -1,8 +1,11 @@
 module mo_test
 !contains the subroutines with tests
 
-use mo_forpy
-use mo_timer 
+use mo_forpy, only: py_module, py_import_module, py_object, py_cast,   & 
+                  & py_tuple, py_tuple_create, py_ndarray,             & 
+                  & py_ndarray_create_empty, py_ndarray_create_nocopy, &
+                  & py_get_arr_order, py_call, py_err_print
+use mo_timer, only: timer_start, timer_stop, get_time, get_timer_method
 
 implicit none
 

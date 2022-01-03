@@ -1,7 +1,7 @@
 module mo_timer
 
 #ifdef OMP_WTIME
-use omp_lib
+use omp_lib,            only: omp_get_wtime
 #endif
 #ifdef ICON_WALLCLOCK
 USE iso_c_binding,      ONLY: c_loc
